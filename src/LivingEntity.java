@@ -44,22 +44,7 @@ public class LivingEntity extends Item{
         }
         return happiest;
     }
-    
-    
-    
-    
-    public static boolean isClique(ArrayList set) {
-    		for (int i=0; i<set.size(); i++) {
-    			ArrayList<LivingEntity> currentFriends = set.get(i).getFriends();
-    			for (int j=0; j<set.size(); j++) {
-    				if (!(j==i || currentFriends.contains(set.get(j)))) {
-    					return false;
-    				}
-    			} 
-    			
-    		} 
-    		return true;
-    }
+
 
     public Moment getOverallHappiestMoment() {
         double maxHappiness = 0;
@@ -79,6 +64,33 @@ public class LivingEntity extends Item{
             sum += list.get(i);
         }
         return sum;
+    }
+
+    public ArrayList findMaximumCliqueOfFriends() {
+        ArrayList list = new ArrayList();
+
+        for (LivingEntity friend : friends) {
+            if (friend.isClique(friends)) {
+                list.add(friend);
+//                 list.removeDuplicates();
+            }
+        }
+
+        return list;
+    }
+
+
+    public static boolean isClique(ArrayList set) {
+        for (int i=0; i<set.size(); i++) {
+            ArrayList<LivingEntity> currentFriends = ((LivingEntity)set.get(i)).getFriends();
+            for (int j=0; j<set.size(); j++) {
+                if (!(j==i || currentFriends.contains(set.get(j)))) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
     }
 
 }
