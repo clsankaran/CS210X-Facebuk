@@ -10,17 +10,18 @@ public class LivingEntity extends Item{
         this.moments = new ArrayList<Moment>();
     }
 
-    public void setFreinds(ArrayList<LivingEntity> friends) {
+    public void setFriends(ArrayList<LivingEntity> friends) {
         this.friends = friends;
+    }
+    
+    public ArrayList<LivingEntity> getFriends() {
+        return(this.friends);
     }
 
     public void setMoments(ArrayList<Moment> moments) {
         this.moments = moments;
     }
 
-    public ArrayList<LivingEntity> getFriends() {
-        return(this.friends);
-    }
 
     public LivingEntity getFriendWithWhomIAmHappiest() {
         LivingEntity happiest = null;
@@ -29,7 +30,7 @@ public class LivingEntity extends Item{
         for(int i = 0; i < this.friends.size(); i++){
             float currTotal = 0;
             float currAmm = 0;
-            for(int j = 0; j < this.moments.size(); j++){
+            for(int j = 0; j < this.moments.size(); j++) {
                 if(this.moments.get(j).getParticipants().contains(this.friends.get(i))){
                     currAmm++;
                     currTotal += this.moments.get(j).getSmileValues().get(this.moments.get(j).getParticipants().indexOf(this));
@@ -42,6 +43,19 @@ public class LivingEntity extends Item{
             }
         }
         return happiest;
+    }
+    
+    public static boolean isClique(ArrayList set) {
+    		for (int i=0; i<set.size(); i++) {
+    			ArrayList<LivingEntity> currentFriends = set.get(i).getFriends();
+    			for (int j=0; j<set.size(); j++) {
+    				if (!(j==i || currentFriends.contains(set.get(j)))) {
+    					return false;
+    				}
+    			}
+    			
+    		}
+    		return true;
     }
 
 }
