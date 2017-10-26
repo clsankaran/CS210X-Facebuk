@@ -52,7 +52,7 @@ public class LivingEntity extends Item{
     				if (!(j==i || currentFriends.contains(set.get(j)))) {
     					return false;
     				}
-    			}
+    			} 
     			
     		} 
     		return true;
