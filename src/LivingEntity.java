@@ -65,7 +65,7 @@ public class LivingEntity extends Item{
             if (getAverage(moments.get(i).getSmileValues()) >= maxHappiness) {
                 maxHappiness = getAverage(moments.get(i).getSmileValues());
                 maxMoment = moments.get(i);
-            }
+            } 
         }
         return maxMoment;
     }
