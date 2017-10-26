@@ -58,4 +58,24 @@ public class LivingEntity extends Item{
     		return true;
     }
 
+    public Moment getOverallHappiestMoment() {
+        double maxHappiness = 0;
+        Moment maxMoment = null;
+        for (int i = 0; i < moments.size(); i++) {
+            if (getAverage(moments.get(i).getSmileValues()) >= maxHappiness) {
+                maxHappiness = getAverage(moments.get(i).getSmileValues());
+                maxMoment = moments.get(i);
+            }
+        }
+        return maxMoment;
+    }
+
+    public double getAverage(ArrayList<Float> list) {
+        double sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum += list.get(i);
+        }
+        return sum;
+    }
+
 }
