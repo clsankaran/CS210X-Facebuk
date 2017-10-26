@@ -54,7 +54,7 @@ public class LivingEntity extends Item{
     				}
     			} 
     			
-    		} 
+    		}
     		return true;
     }
 
