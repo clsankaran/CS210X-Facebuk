@@ -45,6 +45,9 @@ public class LivingEntity extends Item{
         return happiest;
     }
     
+    
+    
+    
     public static boolean isClique(ArrayList set) {
     		for (int i=0; i<set.size(); i++) {
     			ArrayList<LivingEntity> currentFriends = set.get(i).getFriends();
