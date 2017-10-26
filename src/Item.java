@@ -8,6 +8,14 @@ public class Item {
         this.image = image;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
     public boolean equals(Item item){
         if(this.name.equals(item.name)){
             return true;

@@ -10,7 +10,7 @@ public class LivingEntity extends Item{
         this.moments = new ArrayList<Moment>();
     }
 
-    public void setFreinds(ArrayList<LivingEntity> friends) {
+    public void setFriends(ArrayList<LivingEntity> friends) {
         this.friends = friends;
     }
 
@@ -53,7 +53,6 @@ public class LivingEntity extends Item{
                 maxMoment = moments.get(i);
             }
         }
-
         return maxMoment;
     }
 
