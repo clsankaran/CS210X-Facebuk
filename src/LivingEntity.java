@@ -22,4 +22,26 @@ public class LivingEntity extends Item{
         return(this.friends);
     }
 
+    public LivingEntity getFriendWithWhomIAmHappiest() {
+        LivingEntity happiest = null;
+        float highestAvg = 0;
+        float currAvg = 0;
+        for(int i = 0; i < this.friends.size(); i++){
+            float currTotal = 0;
+            float currAmm = 0;
+            for(int j = 0; j < this.moments.size(); j++){
+                if(this.moments.get(j).getParticipants().contains(this.friends.get(i))){
+                    currAmm++;
+                    currTotal += this.moments.get(j).getSmileValues().get(this.moments.get(j).getParticipants().indexOf(this));
+                }
+            }
+            currAvg = currTotal / currAmm;
+            if(currAvg > highestAvg){
+                highestAvg = currAvg;
+                happiest = this.friends.get(i);
+            }
+        }
+        return happiest;
+    }
+
 }

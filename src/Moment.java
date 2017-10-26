@@ -10,4 +10,12 @@ public class Moment extends Item {
         this.smileValues = smileValues;
     }
 
+    public ArrayList<Person> getParticipants() {
+        return participants;
+    }
+
+    public ArrayList<Float> getSmileValues() {
+        return smileValues;
+    }
+
 }
