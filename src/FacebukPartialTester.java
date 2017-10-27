@@ -1,8 +1,6 @@
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -144,19 +142,19 @@ public class FacebukPartialTester {
 		_bo.setMoments(boMoments);
 	}
 
-	@Test
+	@org.junit.Test
 	public void testEquals () {
 		assertEquals(_michelle, new Person("Michelle", new Image("Michelle.png")));
 		assertEquals(_michelle, new Person("Michelle", new Image("Michelle2.png")));  // should still work
 		assertNotEquals(_michelle, _barack);
 	}
 
-	@Test
+	@org.junit.Test
 	public void testFindBestMoment () {
 		assertEquals(_michelle.getOverallHappiestMoment(), _meAndBarack);
 	}
 
-	@Test
+	@org.junit.Test
 	public void testGetFriendWithWhomIAmHappiest () {
 		assertEquals(_michelle.getFriendWithWhomIAmHappiest(), _barack);
 	}

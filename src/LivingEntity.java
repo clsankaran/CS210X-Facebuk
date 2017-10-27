@@ -74,6 +74,24 @@ public class LivingEntity extends Item{
         return list;
     }
 
+    public ArrayList makePowerSet(ArrayList<Person> list) {
+        final ArrayList<ArrayList<Person>> powerSet = new ArrayList();
+
+        ArrayList<Person> placeholder = new ArrayList<>();
+        for (Person p : list) {
+            for (ArrayList<Person> set : powerSet) {
+                placeholder.addAll(set);
+                placeholder.add(p);
+                powerSet.add(placeholder);
+            }
+            ArrayList<Person> singlePersonList = new ArrayList<>();
+            singlePersonList.add(p);
+            powerSet.add(singlePersonList);
+        }
+
+        return powerSet;
+    }
+
 
     public static boolean isClique(ArrayList set) {
         for (int i = 0; i < set.size(); i++) {
