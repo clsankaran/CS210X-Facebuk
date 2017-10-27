@@ -1,21 +1,21 @@
 import java.util.ArrayList;
 public class Moment extends Item {
 
-    private ArrayList<Person> participants;
-    private ArrayList<Float> smileValues;
-
+    private ArrayList<Person> _participants;
+    private ArrayList<Float> _smileValues;
+    
     Moment(String name, Image image, ArrayList<Person> participants, ArrayList<Float> smileValues){
         super(name, image);
-        this.participants = participants;
-        this.smileValues = smileValues;
+        this._participants = participants;
+        this._smileValues = smileValues;
     }
 
     public ArrayList<Person> getParticipants() {
-        return participants;
+        return _participants;
     }
 
     public ArrayList<Float> getSmileValues() {
-        return smileValues;
+        return _smileValues;
     }
 
 }

@@ -1,7 +1,9 @@
 public class Image {
-	String filename;
+
+	String _filename;
+
 	public Image (String filename) {
-		this.filename = filename;
+		this._filename = filename;
 	}
 }
 

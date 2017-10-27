@@ -1,15 +1,15 @@
 public class Possession extends Item{
 
-    private Person owner;
-    private float price;
+    private Person _owner;
+    private float _price;
 
     Possession(String name, Image image, Float price){
         super(name, image);
-        this.price = price;
+        this._price = price;
     }
 
     public void setOwner(Person owner) {
-        this.owner = owner;
+        this._owner = owner;
     }
 
 }

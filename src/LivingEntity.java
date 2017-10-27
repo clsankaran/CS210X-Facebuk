@@ -1,25 +1,25 @@
 import java.util.ArrayList;
 public class LivingEntity extends Item{
 
-    private ArrayList<LivingEntity> friends;
-    private ArrayList<Moment> moments;
+    private ArrayList<LivingEntity> _friends;
+    private ArrayList<Moment> _moments;
 
-    LivingEntity(String name, Image image){
+    public LivingEntity(String name, Image image){
         super(name, image);
-        this.friends = new ArrayList<LivingEntity>();
-        this.moments = new ArrayList<Moment>();
+        this._friends = new ArrayList<LivingEntity>();
+        this._moments = new ArrayList<Moment>();
     }
 
     public void setFriends(ArrayList<LivingEntity> friends) {
-        this.friends = friends;
+        this._friends = friends;
     }
     
     public ArrayList<LivingEntity> getFriends() {
-        return(this.friends);
+        return(this._friends);
     }
 
     public void setMoments(ArrayList<Moment> moments) {
-        this.moments = moments;
+        this._moments = moments;
     }
 
 
@@ -27,19 +27,19 @@ public class LivingEntity extends Item{
         LivingEntity happiest = null;
         float highestAvg = 0;
         float currAvg = 0;
-        for(int i = 0; i < this.friends.size(); i++){
+        for(int i = 0; i < this._friends.size(); i++){
             float currTotal = 0;
             float currAmm = 0;
-            for(int j = 0; j < this.moments.size(); j++) {
-                if(this.moments.get(j).getParticipants().contains(this.friends.get(i))){
+            for(int j = 0; j < this._moments.size(); j++) {
+                if(this._moments.get(j).getParticipants().contains(this._friends.get(i))){
                     currAmm++;
-                    currTotal += this.moments.get(j).getSmileValues().get(this.moments.get(j).getParticipants().indexOf(this));
+                    currTotal += this._moments.get(j).getSmileValues().get(this._moments.get(j).getParticipants().indexOf(this));
                 }
             }
             currAvg = currTotal / currAmm;
             if(currAvg > highestAvg){
                 highestAvg = currAvg;
-                happiest = this.friends.get(i);
+                happiest = this._friends.get(i);
             }
         }
         return happiest;
@@ -49,10 +49,10 @@ public class LivingEntity extends Item{
     public Moment getOverallHappiestMoment() {
         double maxHappiness = 0;
         Moment maxMoment = null;
-        for (int i = 0; i < moments.size(); i++) {
-            if (getAverage(moments.get(i).getSmileValues()) >= maxHappiness) {
-                maxHappiness = getAverage(moments.get(i).getSmileValues());
-                maxMoment = moments.get(i);
+        for (int i = 0; i < _moments.size(); i++) {
+            if (getAverage(_moments.get(i).getSmileValues()) >= maxHappiness) {
+                maxHappiness = getAverage(_moments.get(i).getSmileValues());
+                maxMoment = _moments.get(i);
             } 
         }
         return maxMoment;
@@ -69,22 +69,17 @@ public class LivingEntity extends Item{
     public ArrayList findMaximumCliqueOfFriends() {
         ArrayList list = new ArrayList();
 
-        for (LivingEntity friend : friends) {
-            if (friend.isClique(friends)) {
-                list.add(friend);
-//                 list.removeDuplicates();
-            }
-        }
+
 
         return list;
     }
 
 
     public static boolean isClique(ArrayList set) {
-        for (int i=0; i<set.size(); i++) {
-            ArrayList<LivingEntity> currentFriends = ((LivingEntity)set.get(i)).getFriends();
-            for (int j=0; j<set.size(); j++) {
-                if (!(j==i || currentFriends.contains(set.get(j)))) {
+        for (int i = 0; i < set.size(); i++) {
+            final ArrayList<LivingEntity> currentFriends = ((LivingEntity)set.get(i)).getFriends();
+            for (int j = 0; j < set.size(); j++) {
+                if (!(j == i || currentFriends.contains(set.get(j)))) {
                     return false;
                 }
             }
@@ -92,5 +87,6 @@ public class LivingEntity extends Item{
         }
         return true;
     }
+
 
 }

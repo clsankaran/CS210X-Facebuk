@@ -1,23 +1,23 @@
 public class Item {
 
-    private String name;
-    private Image image;
+    private String _name;
+    private Image _image;
 
     Item(String name, Image image){
-        this.name = name;
-        this.image = image;
+        this._name = name;
+        this._image = image;
     }
 
     public String getName() {
-        return name;
+        return _name;
     }
 
     public Image getImage() {
-        return image;
+        return _image;
     }
 
     public boolean equals(Item item){
-        if(this.name.equals(item.name)){
+        if(this._name.equals(item._name)){
             return true;
         } else {
             return false;
