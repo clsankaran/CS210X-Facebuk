@@ -33,16 +33,16 @@ public class PowerSetTester {
     }
 
     private static ArrayList<Person> makePowerSetHelper(int p, ArrayList<Person> set) {
-        ArrayList<Person> subSet = new ArrayList<>();
+        ArrayList<Person> subset = new ArrayList<>();
         int pos = 0;
         // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
         for (int i = p; i > 0; i = i / 2) {
             if (i == 1) {
-                subSet.add(set.get(pos));
+                subset.add(set.get(pos));
             }
             pos++;
         }
-        return subSet;
+        return subset;
     }
 
 

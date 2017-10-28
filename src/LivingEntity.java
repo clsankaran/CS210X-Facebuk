@@ -99,15 +99,15 @@ public class LivingEntity extends Item{
 
     public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
-        int length = (int) Math.pow(2, set.size());
-        for (int i = 0; i < length; i++) {
+        int numSubsets = (int) Math.pow(2, set.size());
+        for (int i = 0; i < numSubsets; i++) {
             powerSet.add(makePowerSetHelper(i, set));
         }
         return powerSet;
     }
 
     private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
-        ArrayList<LivingEntity> subSet = new ArrayList<>();
+        ArrayList<LivingEntity> subset = new ArrayList<>();
         int pos = 0;
         // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
         for (int i = powerSetIndex; i > 0; i = i / 2) {
@@ -116,7 +116,7 @@ public class LivingEntity extends Item{
             }
             pos++;
         }
-        return subSet;
+        return subset;
     }
 
 
