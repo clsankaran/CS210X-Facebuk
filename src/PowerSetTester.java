@@ -5,7 +5,7 @@ public class PowerSetTester {
 
     public static void main(String[] args) {
 
-        ArrayList<String> list = makePowerSet(initPeople());
+        ArrayList<ArrayList<LivingEntity>> list = makePowerSet(initPeople());
         System.out.println(list);
         System.out.println(list.size());
 
@@ -23,24 +23,22 @@ public class PowerSetTester {
         return list;
     }
 
-    public static ArrayList<ArrayList<Person>> makePowerSet(ArrayList<Person> set) {
-        ArrayList<ArrayList<Person>> powerSet = new ArrayList<>();
-        int length = (int) Math.pow(2, set.size());
-        for (int i = 0; i < length; i++) {
+    public static ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
+        ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
+        int numSubsets = (int) Math.pow(2, set.size());
+        for (int i = 0; i < numSubsets; i++) {
             powerSet.add(makePowerSetHelper(i, set));
         }
         return powerSet;
     }
 
-    private static ArrayList<Person> makePowerSetHelper(int p, ArrayList<Person> set) {
-        ArrayList<Person> subset = new ArrayList<>();
-        int pos = 0;
-        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
-        for (int i = p; i > 0; i = i / 2) {
-            if (i == 1) {
-                subset.add(set.get(pos));
+    private static ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
+    		ArrayList<LivingEntity> subset = new ArrayList<>();
+        for (int i = set.size() - 1; i >= 0; i--) {
+            if (powerSetIndex >= Math.pow(2,i)) {
+                subset.add(set.get(i));
+                powerSetIndex-=Math.pow(2,i);
             }
-            pos++;
         }
         return subset;
     }

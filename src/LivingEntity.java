@@ -77,7 +77,7 @@ public class LivingEntity extends Item{
             }
         }
 
-        return longestClique;
+        return largestClique;
 
     }
 
@@ -87,21 +87,19 @@ public class LivingEntity extends Item{
     public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
-        for (int i = 1; i <= numSubsets; i++) {
+        for (int i = 0; i < numSubsets; i++) {
             powerSet.add(makePowerSetHelper(i, set));
         }
         return powerSet;
     }
 
     private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
-        ArrayList<LivingEntity> subset = new ArrayList<>();
-        
-        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
-        for (int i = powerSetIndex; i > 0; i = i / 2) {
-            if (i == 1) {
-                subset.add(set.get(pos));
+    		ArrayList<LivingEntity> subset = new ArrayList<>();
+        for (int i = set.size() - 1; i >= 0; i--) {
+            if (powerSetIndex >= Math.pow(2,i)) {
+                subset.add(set.get(i));
+                powerSetIndex-=Math.pow(2,i);
             }
-            pos++;
         }
         return subset;
     }
