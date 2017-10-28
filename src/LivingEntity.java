@@ -82,8 +82,6 @@ public class LivingEntity extends Item{
     }
 
 
-
-
     private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
