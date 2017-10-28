@@ -67,29 +67,56 @@ public class LivingEntity extends Item{
     }
 
     public ArrayList findMaximumCliqueOfFriends() {
-        ArrayList list = new ArrayList();
+
+        ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
+        int longest = 0;
+        ArrayList longestClique = new ArrayList();
+
+        for (ArrayList<LivingEntity> clique : list) {
+            if (clique.size() >= longest) {
+                longestClique = clique;
+                longest = clique.size();
+            }
+        }
+
+        return longestClique;
+
+    }
 
 
+    private ArrayList<ArrayList<LivingEntity>> getListOfCliques(ArrayList<ArrayList<LivingEntity>> list) {
+
+        for (int i = 0; i < list.size(); i++) {
+            if (!isClique(list.get(i))) {
+                list.remove(i);
+                i--;
+            }
+        }
 
         return list;
     }
 
-    public ArrayList makePowerSet(ArrayList<Person> list) {
-        final ArrayList<ArrayList<Person>> powerSet = new ArrayList();
 
-        ArrayList<Person> placeholder = new ArrayList<>();
-        for (Person p : list) {
-            for (ArrayList<Person> set : powerSet) {
-                placeholder.addAll(set);
-                placeholder.add(p);
-                powerSet.add(placeholder);
-            }
-            ArrayList<Person> singlePersonList = new ArrayList<>();
-            singlePersonList.add(p);
-            powerSet.add(singlePersonList);
+    public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
+        ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
+        int length = (int) Math.pow(2, set.size());
+        for (int i = 0; i < length; i++) {
+            powerSet.add(makePowerSetHelper(i, set));
         }
-
         return powerSet;
+    }
+
+    private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
+        ArrayList<LivingEntity> subSet = new ArrayList<>();
+        int pos = 0;
+        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
+        for (int i = powerSetIndex; i > 0; i = i / 2) {
+            if (i == 1) {
+                subSet.add(set.get(pos));
+            }
+            pos++;
+        }
+        return subSet;
     }
 
 
@@ -105,6 +132,5 @@ public class LivingEntity extends Item{
         }
         return true;
     }
-
 
 }

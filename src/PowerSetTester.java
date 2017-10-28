@@ -1,35 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class PowerSetTester {
 
-    private Person _barack, _michelle, _kevin, _ina, _joe, _malia;
-
     public static void main(String[] args) {
 
-        System.out.println("h");
-        System.out.println(makePowerSet(initPeople()).toString());
-        System.out.println("i");
+        ArrayList<String> list = makePowerSet(initPeople());
+        System.out.println(list);
+        System.out.println(list.size());
+
+
     }
 
-    public static ArrayList makePowerSet(ArrayList<Person> list) {
-        final ArrayList<ArrayList<Person>> powerSet = new ArrayList();
-
-        ArrayList<Person> placeholder = new ArrayList<>();
-        for (Person p : list) {
-            for (ArrayList<Person> set : powerSet) {
-                placeholder.addAll(set);
-                placeholder.add(p);
-                powerSet.add(placeholder);
-            }
-            ArrayList<Person> singlePersonList = new ArrayList<>();
-            singlePersonList.add(p);
-            powerSet.add(singlePersonList);
-        }
-
-        return powerSet;
-    }
-
-    private static ArrayList initPeople () {
+    private static ArrayList initPeople() {
         ArrayList list = new ArrayList();
         list.add(new Person("Michelle", new Image("Michelle.png")));
         list.add(new Person("Barack", new Image("Barack.png")));
@@ -39,6 +22,29 @@ public class PowerSetTester {
         list.add(new Person("Malia", new Image("Malia.png")));
         return list;
     }
+
+    public static ArrayList<ArrayList<Person>> makePowerSet(ArrayList<Person> set) {
+        ArrayList<ArrayList<Person>> powerSet = new ArrayList<>();
+        int length = (int) Math.pow(2, set.size());
+        for (int i = 0; i < length; i++) {
+            powerSet.add(makePowerSetHelper(i, set));
+        }
+        return powerSet;
+    }
+
+    private static ArrayList<Person> makePowerSetHelper(int p, ArrayList<Person> set) {
+        ArrayList<Person> subSet = new ArrayList<>();
+        int pos = 0;
+        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
+        for (int i = p; i > 0; i = i / 2) {
+            if (i == 1) {
+                subSet.add(set.get(pos));
+            }
+            pos++;
+        }
+        return subSet;
+    }
+
 
 }
 
