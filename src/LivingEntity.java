@@ -68,14 +68,12 @@ public class LivingEntity extends Item{
 
     public ArrayList findMaximumCliqueOfFriends() {
 
-        ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
-        int longest = 0;
-        ArrayList longestClique = new ArrayList();
+        final ArrayList<ArrayList<LivingEntity>> powerSet = makePowerSet(_friends);
+        ArrayList<LivingEntity> largestClique = new ArrayList<LivingEntity>();
 
-        for (ArrayList<LivingEntity> clique : list) {
-            if (clique.size() >= longest) {
-                longestClique = clique;
-                longest = clique.size();
+        for (ArrayList<LivingEntity> subset : powerSet) {
+            if (isClique(subset) && subset.size() > largestClique.size()) {
+                largestClique = subset;
             }
         }
 
@@ -84,23 +82,12 @@ public class LivingEntity extends Item{
     }
 
 
-    private ArrayList<ArrayList<LivingEntity>> getListOfCliques(ArrayList<ArrayList<LivingEntity>> list) {
-
-        for (int i = 0; i < list.size(); i++) {
-            if (!isClique(list.get(i))) {
-                list.remove(i);
-                i--;
-            }
-        }
-
-        return list;
-    }
 
 
     public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
-        for (int i = 0; i < numSubsets; i++) {
+        for (int i = 1; i <= numSubsets; i++) {
             powerSet.add(makePowerSetHelper(i, set));
         }
         return powerSet;
@@ -108,11 +95,11 @@ public class LivingEntity extends Item{
 
     private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
         ArrayList<LivingEntity> subset = new ArrayList<>();
-        int pos = 0;
+        
         // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
         for (int i = powerSetIndex; i > 0; i = i / 2) {
             if (i == 1) {
-                subSet.add(set.get(pos));
+                subset.add(set.get(pos));
             }
             pos++;
         }
