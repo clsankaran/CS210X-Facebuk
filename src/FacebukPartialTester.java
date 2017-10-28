@@ -157,6 +157,8 @@ public class FacebukPartialTester {
 	@org.junit.Test
 	public void testGetFriendWithWhomIAmHappiest () {
 		assertEquals(_michelle.getFriendWithWhomIAmHappiest(), _barack);
+		assertEquals(_barack.getFriendWithWhomIAmHappiest(), _michelle);
+		assertEquals(_bo.getFriendWithWhomIAmHappiest(), _malia);
 	}
 
 	// TODO: write more methods to test getFriendWithWhomIAmHappiest 
