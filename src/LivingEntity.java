@@ -58,12 +58,12 @@ public class LivingEntity extends Item{
         return maxMoment;
     }
 
-    public double getAverage(ArrayList<Float> list) {
+    private double getAverage(ArrayList<Float> list) {
         double sum = 0;
         for (int i = 0; i < list.size(); i++) {
             sum += list.get(i);
         }
-        return sum;
+        return sum/list.size();
     }
 
     public ArrayList findMaximumCliqueOfFriends() {
