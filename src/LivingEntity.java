@@ -68,7 +68,7 @@ public class LivingEntity extends Item{
 
     public ArrayList findMaximumCliqueOfFriends() {
 
-        final ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
+        ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
         int longest = 0;
         ArrayList longestClique = new ArrayList();
 
@@ -97,8 +97,8 @@ public class LivingEntity extends Item{
     }
 
 
-    private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
-        final ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
+    public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
+        ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int length = (int) Math.pow(2, set.size());
         for (int i = 0; i < length; i++) {
             powerSet.add(makePowerSetHelper(i, set));
@@ -107,7 +107,7 @@ public class LivingEntity extends Item{
     }
 
     private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
-        final ArrayList<LivingEntity> subSet = new ArrayList<>();
+        ArrayList<LivingEntity> subSet = new ArrayList<>();
         int pos = 0;
         // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
         for (int i = powerSetIndex; i > 0; i = i / 2) {

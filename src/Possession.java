@@ -5,11 +5,11 @@ public class Possession extends Item{
 
     Possession(String name, Image image, Float price){
         super(name, image);
-        this._price = price;
+        _price = price;
     }
 
     public void setOwner(Person owner) {
-        this._owner = owner;
+        _owner = owner;
     }
 
 }

@@ -114,7 +114,7 @@ public class MyTester {
 
         System.out.println(_michelle.equals(new Person("Michelle", new Image("Michelle.png"))));
         System.out.println(_michelle.equals(new Person("Michelle", new Image("Michelle2.png"))));
-        //_michelle.getOverallHappiestMoment(); // _meAndBarack
+        System.out.println(_michelle.getOverallHappiestMoment().getParticipants());
 
         System.out.println(_michelle.getFriendWithWhomIAmHappiest().getName()); // _barack
     }

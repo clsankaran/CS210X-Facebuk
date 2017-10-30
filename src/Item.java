@@ -12,12 +12,8 @@ public class Item {
         return _name;
     }
 
-    public Image getImage() {
-        return _image;
-    }
-
     public boolean equals(Item item){
-        if(this._name.equals(item._name)){
+        if(_name.equals(item.getName())){
             return true;
         } else {
             return false;

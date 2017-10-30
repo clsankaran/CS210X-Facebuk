@@ -6,8 +6,8 @@ public class Moment extends Item {
     
     Moment(String name, Image image, ArrayList<LivingEntity> participants, ArrayList<Float> smileValues){
         super(name, image);
-        this._participants = participants;
-        this._smileValues = smileValues;
+        _participants = participants;
+        _smileValues = smileValues;
     }
 
     public ArrayList<LivingEntity> getParticipants() {
