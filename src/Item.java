@@ -12,8 +12,8 @@ public class Item {
         return _name;
     }
 
-    public boolean equals(Item item){
-        if(_name.equals(item.getName())){
+    public boolean equals(Object o){
+        if(_name.equals(((Item) o).getName())){
             return true;
         } else {
             return false;

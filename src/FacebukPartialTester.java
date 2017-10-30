@@ -1,8 +1,8 @@
-/*import static org.junit.Assert.*;
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Before;
 
-import java.util.ArrayList;*/
+import java.util.ArrayList;
 
 /**
  * This is a SUBSET of the unit tests with which we will grade your code.
@@ -10,7 +10,7 @@ import java.util.ArrayList;*/
  * Make absolute sure that your code can compile together with this tester!
  * If it does not, you may get a very low grade for your assignment.
  */
-/*public class FacebukPartialTester {
+public class FacebukPartialTester {
 	private Person _barack, _michelle, _kevin, _ina, _joe, _malia;
 	private Pet _bo, _sunny;
 	private Moment _meAndBarack;
@@ -166,4 +166,4 @@ import java.util.ArrayList;*/
 	
 	// TODO: write methods to test isClique 
 	// TODO: write methods to test findMaximumCliqueOfFriends
-}*/
+}
