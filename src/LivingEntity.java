@@ -27,7 +27,7 @@ public class LivingEntity extends Item{
         LivingEntity happiest = null;
         float highestAvg = 0;
         float currAvg = 0;
-        for(int i = 0; i < this._friends.size(); i++){
+        for(int i = 0; i < this._friends.size(); i++) {
             float currTotal = 0;
             float currAmm = 0;
             for(int j = 0; j < this._moments.size(); j++) {
@@ -36,10 +36,15 @@ public class LivingEntity extends Item{
                     currTotal += this._moments.get(j).getSmileValues().get(this._moments.get(j).getParticipants().indexOf(this));
                 }
             }
-            currAvg = currTotal / currAmm;
-            if(currAvg > highestAvg){
-                highestAvg = currAvg;
-                happiest = this._friends.get(i);
+            if (currAmm==0) { //make sure it doesn't crash if the friends don't appear in any moments together
+            		currAvg=0;
+            }
+            else {
+            		currAvg = currTotal / currAmm;
+            }
+            if (currAvg > highestAvg) {
+            		highestAvg = currAvg;
+            		happiest = this._friends.get(i);
             }
         }
         return happiest;
