@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class FacebukPartialTester {
 	private Person _barack, _michelle, _kevin, _ina, _joe, _malia;
 	private Pet _bo, _sunny;
-	private Moment _meAndBarack;
+	private Moment _meAndBarack, _meJoeAndCo;
 	private ArrayList _michelleAndBarack, _michelleJoeBoAndMalia;
 
 	@Before
@@ -86,7 +86,7 @@ public class FacebukPartialTester {
 		_barack.setFriends(michelleList);
 		_kevin.setFriends(michelleList);
 		_ina.setFriends(michelleList);
-	
+
 		// Finish configuring pets
 		_bo.setFriends(maliaAndSunny);
 		_sunny.setFriends(maliaAndBo);
@@ -118,11 +118,11 @@ public class FacebukPartialTester {
 
 		// Moments
 		_meAndBarack = new Moment("Me & Barack", new Image("MeAndBarack.png"), _michelleAndBarack, michelleAndBarackSmiles);
-		final Moment meJoeAndCo = new Moment("Me, Joe & co.", new Image("MeJoeAndCo.png"), _michelleJoeBoAndMalia, michelleJoeBoAndMaliaSmiles);
+		_meJoeAndCo = new Moment("Me, Joe & co.", new Image("MeJoeAndCo.png"), _michelleJoeBoAndMalia, michelleJoeBoAndMaliaSmiles);
 
 		final ArrayList michelleMoments = new ArrayList();
 		michelleMoments.add(_meAndBarack);
-		michelleMoments.add(meJoeAndCo);
+		michelleMoments.add(_meJoeAndCo);
 		_michelle.setMoments(michelleMoments);
 
 		final ArrayList barackMoments = new ArrayList();
@@ -130,28 +130,61 @@ public class FacebukPartialTester {
 		_barack.setMoments(barackMoments);
 
 		final ArrayList joeMoments = new ArrayList();
-		joeMoments.add(meJoeAndCo);
+		joeMoments.add(_meJoeAndCo);
 		_joe.setMoments(joeMoments);
 
 		final ArrayList maliaMoments = new ArrayList();
-		maliaMoments.add(meJoeAndCo);
+		maliaMoments.add(_meJoeAndCo);
 		_malia.setMoments(maliaMoments);
 
 		final ArrayList boMoments = new ArrayList();
-		boMoments.add(meJoeAndCo);
+		boMoments.add(_meJoeAndCo);
 		_bo.setMoments(boMoments);
 	}
 
 	@org.junit.Test
 	public void testEquals () {
 		assertEquals(_michelle, new Person("Michelle", new Image("Michelle.png")));
-		assertEquals(_michelle, new Person("Michelle", new Image("Michelle2.png")));  // should still work
+		assertEquals(_michelle, new Person("Michelle", new Image("Michelle2.png")));
 		assertNotEquals(_michelle, _barack);
 	}
 
 	@org.junit.Test
 	public void testFindBestMoment () {
 		assertEquals(_michelle.getOverallHappiestMoment(), _meAndBarack);
+
+		assertEquals(_joe.getOverallHappiestMoment(), _meJoeAndCo);
+
+		//Making new people and moments for test cases
+		final Pet boTest = new Pet("Bo", new Image("Bo.png"));
+		final Pet sunnyTest = new Pet("Sunny", new Image("Sunny.png"));
+		final Person maliaTest = new Person("Malia", new Image("Malia.png"));
+
+		final ArrayList maliaSunnyAndBoList = new ArrayList();
+		maliaSunnyAndBoList.add(maliaTest);
+		maliaSunnyAndBoList.add(sunnyTest);
+		maliaSunnyAndBoList.add(boTest);
+
+		final ArrayList smiles = new ArrayList();
+		smiles.add(0.2f);
+		smiles.add(0.3f);
+		smiles.add(0.4f);
+		smiles.add(0.5f);
+
+		final Moment maliaSunnyAndBo =
+				new Moment("Malia Sunny and Bo", new Image("MaliaSunnyAndBo.png"), maliaSunnyAndBoList, smiles);
+
+		final ArrayList moments = new ArrayList();
+		moments.add(maliaSunnyAndBo);
+		maliaTest.setMoments(moments);
+		sunnyTest.setMoments(moments);
+		boTest.setMoments(moments);
+
+		assertEquals(boTest.getOverallHappiestMoment(), maliaSunnyAndBo); // typical case
+
+
+		assertEquals(_kevin.getOverallHappiestMoment(), null); // no moments
+
 	}
 
 	@org.junit.Test
@@ -159,18 +192,20 @@ public class FacebukPartialTester {
 		assertEquals(_michelle.getFriendWithWhomIAmHappiest(), _barack);
 		assertEquals(_barack.getFriendWithWhomIAmHappiest(), _michelle);
 		assertEquals(_bo.getFriendWithWhomIAmHappiest(), _malia);
+
+		assertEquals(_joe.getFriendWithWhomIAmHappiest(), null);
+		assertEquals(_malia.getFriendWithWhomIAmHappiest(), _bo);
+		assertEquals(_kevin.getFriendWithWhomIAmHappiest(), null); // no moments
+		assertEquals(_ina.getFriendWithWhomIAmHappiest(), null); // no moments
 	}
 
-	// TODO: write more methods to test getFriendWithWhomIAmHappiest 
-	// TODO: write more methods to test getOverallHappiestMoment 
-	
 
     @org.junit.Test
     public void testIsClique () {
 	    ArrayList<LivingEntity> set = new ArrayList();
 
 	    // stub object
-	    LivingEntity obj = new LivingEntity("", new Image(""));
+	    final LivingEntity obj = new LivingEntity("", new Image(""));
 
 	    // Two mutual friends
 	    set = new ArrayList<>();
