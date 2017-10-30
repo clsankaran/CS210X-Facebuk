@@ -85,21 +85,19 @@ public class LivingEntity extends Item{
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
         for (int i = 0; i < numSubsets; i++) {
-            powerSet.add(makePowerSetHelper(i, set));
+        		int powerSetIndex=i;
+        		ArrayList<LivingEntity> subset=new ArrayList<>();
+        		for (int j = set.size() - 1; j >= 0; j--) {
+                    if (powerSetIndex >= Math.pow(2,j)) {
+                        subset.add(set.get(j));
+                        powerSetIndex-=Math.pow(2,j);
+                    }
+                }
+            powerSet.add(subset);
         }
         return powerSet;
     }
 
-    private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
-    		ArrayList<LivingEntity> subset = new ArrayList<>();
-        for (int i = set.size() - 1; i >= 0; i--) {
-            if (powerSetIndex >= Math.pow(2,i)) {
-                subset.add(set.get(i));
-                powerSetIndex-=Math.pow(2,i);
-            }
-        }
-        return subset;
-    }
 
     public static boolean isClique(ArrayList set) {
         for (int i = 0; i < set.size(); i++) {
