@@ -6,8 +6,8 @@ public class LivingEntity extends Item{
 
     public LivingEntity(String name, Image image){
         super(name, image);
-        _friends = new ArrayList<LivingEntity>();
-        _moments = new ArrayList<Moment>();
+        this._friends = new ArrayList<LivingEntity>();
+        this._moments = new ArrayList<Moment>();
     }
 
     public void setFriends(ArrayList<LivingEntity> friends) {
@@ -27,19 +27,19 @@ public class LivingEntity extends Item{
         LivingEntity happiest = null;
         float highestAvg = 0;
         float currAvg = 0;
-        for(int i = 0; i < _friends.size(); i++){
+        for(int i = 0; i < this._friends.size(); i++){
             float currTotal = 0;
             float currAmm = 0;
-            for(int j = 0; j < _moments.size(); j++) {
-                if(_moments.get(j).getParticipants().contains(_friends.get(i))){
+            for(int j = 0; j < this._moments.size(); j++) {
+                if(this._moments.get(j).getParticipants().contains(this._friends.get(i))){
                     currAmm++;
-                    currTotal += _moments.get(j).getSmileValues().get(_moments.get(j).getParticipants().indexOf(this));
+                    currTotal += this._moments.get(j).getSmileValues().get(this._moments.get(j).getParticipants().indexOf(this));
                 }
             }
             currAvg = currTotal / currAmm;
             if(currAvg > highestAvg){
                 highestAvg = currAvg;
-                happiest = _friends.get(i);
+                happiest = this._friends.get(i);
             }
         }
         return happiest;
@@ -58,44 +58,65 @@ public class LivingEntity extends Item{
         return maxMoment;
     }
 
-    private double getAverage(ArrayList<Float> list) {
+    public double getAverage(ArrayList<Float> list) {
         double sum = 0;
         for (int i = 0; i < list.size(); i++) {
             sum += list.get(i);
         }
-        return sum/list.size();
+        return sum;
     }
 
     public ArrayList findMaximumCliqueOfFriends() {
 
-        final ArrayList<ArrayList<LivingEntity>> powerSet = makePowerSet(_friends);
-        ArrayList<LivingEntity> largestClique = new ArrayList<LivingEntity>();
+        ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
+        int longest = 0;
+        ArrayList longestClique = new ArrayList();
 
-        for (ArrayList<LivingEntity> subset : powerSet) {
-            if (isClique(subset) && subset.size() > largestClique.size()) {
-                largestClique = subset;
+        for (ArrayList<LivingEntity> clique : list) {
+            if (clique.size() >= longest) {
+                longestClique = clique;
+                longest = clique.size();
             }
         }
 
-        return largestClique;
+        return longestClique;
 
     }
 
-    private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
+
+    private ArrayList<ArrayList<LivingEntity>> getListOfCliques(ArrayList<ArrayList<LivingEntity>> list) {
+
+        for (int i = 0; i < list.size(); i++) {
+            if (!isClique(list.get(i))) {
+                list.remove(i);
+                i--;
+            }
+        }
+
+        return list;
+    }
+
+
+    public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
-        int numSubsets = (int) Math.pow(2, set.size());
-        for (int i = 0; i < numSubsets; i++) {
-        		int powerSetIndex=i;
-        		ArrayList<LivingEntity> subset=new ArrayList<>();
-        		for (int j = set.size() - 1; j >= 0; j--) {
-                    if (powerSetIndex >= Math.pow(2,j)) {
-                        subset.add(set.get(j));
-                        powerSetIndex-=Math.pow(2,j);
-                    }
-                }
-            powerSet.add(subset);
+        int length = (int) Math.pow(2, set.size());
+        for (int i = 0; i < length; i++) {
+            powerSet.add(makePowerSetHelper(i, set));
         }
         return powerSet;
+    }
+
+    private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
+        ArrayList<LivingEntity> subSet = new ArrayList<>();
+        int pos = 0;
+        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
+        for (int i = powerSetIndex; i > 0; i = i / 2) {
+            if (i == 1) {
+                subSet.add(set.get(pos));
+            }
+            pos++;
+        }
+        return subSet;
     }
 
 
@@ -107,6 +128,7 @@ public class LivingEntity extends Item{
                     return false;
                 }
             }
+
         }
         return true;
     }

@@ -12,4 +12,5 @@ many identical methods. There are also many places where there is a list of pets
 can be used, for example in the participants list of every moment.
 
 We were also thinking about including an Ownable class that would be extended by both Pet and Possession, but the Pet
-class cannot have two super classes and there is only one shared method.
+class cannot have two super classes and there is only one simple shared method, so the code duplication is minimal even 
+even without an Ownable class.
