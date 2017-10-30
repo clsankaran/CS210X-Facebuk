@@ -8,14 +8,12 @@ public class Item {
         this._image = image;
     }
 
-    public String getName() {
-        return _name;
-    }
 
     public boolean equals(Object o){
-        if(_name.equals(((Item) o).getName())){
+        if(_name.equals(((Item) o)._name)){
             return true;
-        } else {
+        } 
+        else {
             return false;
         }
     }
