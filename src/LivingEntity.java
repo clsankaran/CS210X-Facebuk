@@ -97,26 +97,21 @@ public class LivingEntity extends Item{
     }
 
 
-    public ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
+    private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
-        int length = (int) Math.pow(2, set.size());
-        for (int i = 0; i < length; i++) {
-            powerSet.add(makePowerSetHelper(i, set));
+        int numSubsets = (int) Math.pow(2, set.size());
+        for (int i = 0; i < numSubsets; i++) {
+        		int powerSetIndex=i;
+        		ArrayList<LivingEntity> subset=new ArrayList<>();
+        		for (int j = set.size() - 1; j >= 0; j--) {
+                    if (powerSetIndex >= Math.pow(2,j)) {
+                        subset.add(set.get(j));
+                        powerSetIndex-=Math.pow(2,j);
+                    }
+                }
+            powerSet.add(subset);
         }
         return powerSet;
-    }
-
-    private ArrayList<LivingEntity> makePowerSetHelper(int powerSetIndex, ArrayList<LivingEntity> set) {
-        ArrayList<LivingEntity> subSet = new ArrayList<>();
-        int pos = 0;
-        // i = i / 2 is the same as Math.floor(i / 2), because i is defined as an int
-        for (int i = powerSetIndex; i > 0; i = i / 2) {
-            if (i == 1) {
-                subSet.add(set.get(pos));
-            }
-            pos++;
-        }
-        return subSet;
     }
 
 
