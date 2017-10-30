@@ -166,4 +166,45 @@ public class FacebukPartialTester {
 	
 	// TODO: write methods to test isClique 
 	// TODO: write methods to test findMaximumCliqueOfFriends
+
+    @org.junit.Test
+    public void testIsClique () {
+	    ArrayList<LivingEntity> set = new ArrayList();
+
+	    // stub object
+	    LivingEntity obj = new LivingEntity("", new Image(""));
+
+	    // Two mutual friends
+	    set = new ArrayList<>();
+	    set.add(_barack);
+	    set.add(_michelle);
+        assertEquals(obj.isClique(set), true);
+
+        // Not a clique
+        set = new ArrayList<>();
+        set.add(_michelle);
+        set.add(_kevin);
+        set.add(_barack);
+        assertEquals(obj.isClique(set), false);
+
+        // Three mutual friends
+        set = new ArrayList<>();
+        set.add(_michelle);
+        set.add(_kevin);
+        assertEquals(obj.isClique(set), true);
+
+        // Person and Pet
+        set = new ArrayList<>();
+        set.add(_bo);
+        set.add(_malia);
+        assertEquals(obj.isClique(set), true);
+    }
+
+    @org.junit.Test
+    public void testFindMaximumCliqueOfFriends () {
+
+	    // Max clique is of size 1
+	    assertEquals(_michelle.findMaximumCliqueOfFriends().size(), 1);
+    }
+
 }
