@@ -6,8 +6,8 @@ public class LivingEntity extends Item{
 
     public LivingEntity(String name, Image image){
         super(name, image);
-        this._friends = new ArrayList<LivingEntity>();
-        this._moments = new ArrayList<Moment>();
+        _friends = new ArrayList<LivingEntity>();
+        _moments = new ArrayList<Moment>();
     }
 
     public void setFriends(ArrayList<LivingEntity> friends) {
@@ -27,19 +27,19 @@ public class LivingEntity extends Item{
         LivingEntity happiest = null;
         float highestAvg = 0;
         float currAvg = 0;
-        for(int i = 0; i < this._friends.size(); i++){
+        for(int i = 0; i < _friends.size(); i++){
             float currTotal = 0;
             float currAmm = 0;
-            for(int j = 0; j < this._moments.size(); j++) {
-                if(this._moments.get(j).getParticipants().contains(this._friends.get(i))){
+            for(int j = 0; j < _moments.size(); j++) {
+                if(_moments.get(j).getParticipants().contains(_friends.get(i))){
                     currAmm++;
-                    currTotal += this._moments.get(j).getSmileValues().get(this._moments.get(j).getParticipants().indexOf(this));
+                    currTotal += _moments.get(j).getSmileValues().get(_moments.get(j).getParticipants().indexOf(this));
                 }
             }
             currAvg = currTotal / currAmm;
             if(currAvg > highestAvg){
                 highestAvg = currAvg;
-                happiest = this._friends.get(i);
+                happiest = _friends.get(i);
             }
         }
         return happiest;
@@ -81,7 +81,6 @@ public class LivingEntity extends Item{
 
     }
 
-
     private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
@@ -102,7 +101,6 @@ public class LivingEntity extends Item{
         return subset;
     }
 
-
     public static boolean isClique(ArrayList set) {
         for (int i = 0; i < set.size(); i++) {
             final ArrayList<LivingEntity> currentFriends = ((LivingEntity)set.get(i)).getFriends();
@@ -111,7 +109,6 @@ public class LivingEntity extends Item{
                     return false;
                 }
             }
-
         }
         return true;
     }

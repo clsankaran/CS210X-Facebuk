@@ -9,10 +9,11 @@ public class Person extends LivingEntity{
     }
 
     public void setPossessions(ArrayList<Possession> possessions) {
-        this._possessions = possessions;
+        _possessions = possessions;
     }
 
     public void setPets(ArrayList<Pet> pets) {
-        this._pets = pets;
+        _pets = pets;
     }
+
 }
