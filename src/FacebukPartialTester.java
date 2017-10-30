@@ -68,8 +68,8 @@ public class FacebukPartialTester {
 
 		// Malia and Bo
 		final ArrayList maliaAndBo = new ArrayList();
-		maliaAndSunny.add(_malia);
-		maliaAndSunny.add(_bo);
+		maliaAndBo.add(_malia);
+		maliaAndBo.add(_bo);
 
 		// Michelle
 		final ArrayList michelleList = new ArrayList();
@@ -164,8 +164,6 @@ public class FacebukPartialTester {
 	// TODO: write more methods to test getFriendWithWhomIAmHappiest 
 	// TODO: write more methods to test getOverallHappiestMoment 
 	
-	// TODO: write methods to test isClique 
-	// TODO: write methods to test findMaximumCliqueOfFriends
 
     @org.junit.Test
     public void testIsClique () {
@@ -187,7 +185,7 @@ public class FacebukPartialTester {
         set.add(_barack);
         assertEquals(obj.isClique(set), false);
 
-        // Three mutual friends
+        // Two mutual friends
         set = new ArrayList<>();
         set.add(_michelle);
         set.add(_kevin);
@@ -198,13 +196,67 @@ public class FacebukPartialTester {
         set.add(_bo);
         set.add(_malia);
         assertEquals(obj.isClique(set), true);
+
+		// Not a clique
+		set = new ArrayList<>();
+		set.add(_malia);
+		set.add(_bo);
+		set.add(_sunny);
+		assertEquals(obj.isClique(set), false);
+
+
     }
 
     @org.junit.Test
     public void testFindMaximumCliqueOfFriends () {
 
 	    // Max clique is of size 1
-	    assertEquals(_michelle.findMaximumCliqueOfFriends().size(), 1);
+		ArrayList<LivingEntity> result = new ArrayList<>();
+		result.add(_michelle.getFriends().get(_michelle.getFriends().size() - 1));
+		// add the last of the list of friends,
+		// michelle has 3 cliques of the same size (1), so the last one is returned
+		assertEquals(_michelle.findMaximumCliqueOfFriends(), result);
+
+
+		// Max clique is of size 1
+	    result = new ArrayList<>();
+	    result.add(_malia.getFriends().get(_malia.getFriends().size() - 1));
+
+		assertEquals(_malia.findMaximumCliqueOfFriends(), result);
+
+		// Joe has no friends :(
+		result = new ArrayList<>();
+		assertEquals(_joe.findMaximumCliqueOfFriends(), result);
+
+
+		// Setting up a three person clique
+		final Pet boTest = new Pet("Bo", new Image("Bo.png"));
+		final Pet sunnyTest = new Pet("Sunny", new Image("Sunny.png"));
+		final Person maliaTest = new Person("Malia", new Image("Malia.png"));
+
+		final ArrayList<LivingEntity> boTestFriends = new ArrayList<>();
+		boTestFriends.add(sunnyTest);
+		boTestFriends.add(maliaTest);
+
+		boTest.setFriends(boTestFriends);
+
+		final ArrayList<LivingEntity> sunnyTestFriends = new ArrayList<>();
+		sunnyTestFriends.add(boTest);
+		sunnyTestFriends.add(maliaTest);
+
+		sunnyTest.setFriends(sunnyTestFriends);
+
+		final ArrayList<LivingEntity> maliaTestFriends = new ArrayList<>();
+		maliaTestFriends.add(sunnyTest);
+		maliaTestFriends.add(boTest);
+
+		maliaTest.setFriends(maliaTestFriends);
+
+		result = new ArrayList<>();
+		result.add(boTest);
+		result.add(sunnyTest);
+
+		assertEquals(maliaTest.findMaximumCliqueOfFriends(), result);
     }
 
 }
