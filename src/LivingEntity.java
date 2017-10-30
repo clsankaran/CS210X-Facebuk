@@ -63,7 +63,7 @@ public class LivingEntity extends Item{
         for (int i = 0; i < list.size(); i++) {
             sum += list.get(i);
         }
-        return sum;
+        return sum/list.size();
     }
 
     public ArrayList findMaximumCliqueOfFriends() {
