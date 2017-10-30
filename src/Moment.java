@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 public class Moment extends Item {
 
-    private ArrayList<Person> _participants;
+    private ArrayList<LivingEntity> _participants;
     private ArrayList<Float> _smileValues;
     
-    Moment(String name, Image image, ArrayList<Person> participants, ArrayList<Float> smileValues){
+    Moment(String name, Image image, ArrayList<LivingEntity> participants, ArrayList<Float> smileValues){
         super(name, image);
         this._participants = participants;
         this._smileValues = smileValues;
     }
 
-    public ArrayList<Person> getParticipants() {
+    public ArrayList<LivingEntity> getParticipants() {
         return _participants;
     }
 
