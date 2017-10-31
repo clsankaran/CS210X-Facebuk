@@ -12,20 +12,29 @@ public class LivingEntity extends Item{
      */
     public LivingEntity(String name, Image image){
         super(name, image);
-        this._friends = new ArrayList<LivingEntity>();
-        this._moments = new ArrayList<Moment>();
+        _friends = new ArrayList<LivingEntity>();
+        _moments = new ArrayList<Moment>();
     }
 
+    /**
+     * Sets the value of the instance variable _friends to the inputted value friends.
+     * @param friends an ArrayList of LivingEntities who are friends with the LivingEntity.
+     */
     public void setFriends(ArrayList<LivingEntity> friends) {
-        this._friends = friends;
-    }
-    
-    public ArrayList<LivingEntity> getFriends() {
-        return(this._friends);
+        _friends = friends;
     }
 
+
+    public ArrayList<LivingEntity> getFriends() {
+        return(_friends);
+    }
+
+    /**
+     * Sets the value of the instance variable _moments to the inputted value moments.
+     * @param moments an ArrayList of Moments which are the moments the LivingEntity participated in.
+     */
     public void setMoments(ArrayList<Moment> moments) {
-        this._moments = moments;
+        _moments = moments;
     }
 
 
@@ -33,24 +42,24 @@ public class LivingEntity extends Item{
         LivingEntity happiest = null;
         float highestAvg = 0;
         float currAvg = 0;
-        for(int i = 0; i < this._friends.size(); i++) {
+        for(int i = 0; i < _friends.size(); i++) {
             float currTotal = 0;
             float currAmm = 0;
-            for(int j = 0; j < this._moments.size(); j++) {
-                if(this._moments.get(j).getParticipants().contains(this._friends.get(i))){
+            for(int j = 0; j < _moments.size(); j++) {
+                if(_moments.get(j).getParticipants().contains(_friends.get(i))){
                     currAmm++;
-                    currTotal += this._moments.get(j).getSmileValues().get(this._moments.get(j).getParticipants().indexOf(this));
+                    currTotal += _moments.get(j).getSmileValues().get(_moments.get(j).getParticipants().indexOf(this));
                 }
             }
             if (currAmm==0) { //make sure it doesn't crash if the friends don't appear in any moments together
-            		currAvg=0;
+                currAvg=0;
             }
             else {
-            		currAvg = currTotal / currAmm;
+                currAvg = currTotal / currAmm;
             }
             if (currAvg > highestAvg) {
-            		highestAvg = currAvg;
-            		happiest = this._friends.get(i);
+                highestAvg = currAvg;
+                happiest = _friends.get(i);
             }
         }
         return happiest;
@@ -69,7 +78,7 @@ public class LivingEntity extends Item{
         return maxMoment;
     }
 
-    public double getAverage(ArrayList<Float> list) {
+    private double getAverage(ArrayList<Float> list) {
         double sum = 0;
         for (int i = 0; i < list.size(); i++) {
             sum += list.get(i);
@@ -94,7 +103,6 @@ public class LivingEntity extends Item{
 
     }
 
-
     private ArrayList<ArrayList<LivingEntity>> getListOfCliques(ArrayList<ArrayList<LivingEntity>> list) {
 
         for (int i = 0; i < list.size(); i++) {
@@ -106,7 +114,6 @@ public class LivingEntity extends Item{
 
         return list;
     }
-
 
     private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         final ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
