@@ -24,7 +24,10 @@ public class LivingEntity extends Item{
         _friends = friends;
     }
 
-
+    /**
+     * Returns the value of the instance variable _friends.
+     * @return _friends instance variable.
+     */
     public ArrayList<LivingEntity> getFriends() {
         return(_friends);
     }
@@ -37,7 +40,10 @@ public class LivingEntity extends Item{
         _moments = moments;
     }
 
-
+    /**
+     * Produces the friend that the LivingEntity is happiest on average with.
+     * @return the friend who makes them the happiest on average.
+     */
     public LivingEntity getFriendWithWhomIAmHappiest() {
         LivingEntity happiest = null;
         float highestAvg = 0;
@@ -51,7 +57,7 @@ public class LivingEntity extends Item{
                     currTotal += _moments.get(j).getSmileValues().get(_moments.get(j).getParticipants().indexOf(this));
                 }
             }
-            if (currAmm==0) { //make sure it doesn't crash if the friends don't appear in any moments together
+            if (currAmm==0) { // makes sure it doesn't crash if the friends don't appear in any moments together
                 currAvg=0;
             }
             else {
@@ -65,7 +71,10 @@ public class LivingEntity extends Item{
         return happiest;
     }
 
-
+    /**
+     * Produces the moment with the highest average happiness.
+     * @return the moment with the highest average happiness.
+     */
     public Moment getOverallHappiestMoment() {
         double maxHappiness = 0;
         Moment maxMoment = null;
@@ -78,6 +87,10 @@ public class LivingEntity extends Item{
         return maxMoment;
     }
 
+    /**
+     * Helper method to calculate the average of a ArrayList of floats.
+     * @return the average of the floats in the ArrayList.
+     */
     private double getAverage(ArrayList<Float> list) {
         double sum = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -86,6 +99,10 @@ public class LivingEntity extends Item{
         return sum/list.size();
     }
 
+    /**
+     * Produces the largest clique out of the set of friends.
+     * @return largest clique out of the set of friends.
+     */
     public ArrayList findMaximumCliqueOfFriends() {
 
         ArrayList<ArrayList<LivingEntity>> list = getListOfCliques(makePowerSet(_friends));
@@ -103,6 +120,10 @@ public class LivingEntity extends Item{
 
     }
 
+    /**
+     * Helper method that filters out all the non-clique sets from an ArrayList of ArrayLists of LivingEntities.
+     * @return an ArrayList of ArrayLists of LivingEntities containing all ArrayLists that are Cliques.
+     */
     private ArrayList<ArrayList<LivingEntity>> getListOfCliques(ArrayList<ArrayList<LivingEntity>> list) {
 
         for (int i = 0; i < list.size(); i++) {
@@ -115,6 +136,10 @@ public class LivingEntity extends Item{
         return list;
     }
 
+    /**
+     * Helper method that takes in the friend set and produces the power set.
+     * @return a power set based on the inputted set.
+     */
     private ArrayList<ArrayList<LivingEntity>> makePowerSet(ArrayList<LivingEntity> set) {
         final ArrayList<ArrayList<LivingEntity>> powerSet = new ArrayList<>();
         int numSubsets = (int) Math.pow(2, set.size());
@@ -132,7 +157,10 @@ public class LivingEntity extends Item{
         return powerSet;
     }
 
-
+    /**
+     * Helper method that checks if the inputted set is a clique.
+     * @return a boolean false if the set is not a clique and true otherwise.
+     */
     public static boolean isClique(ArrayList set) {
         for (int i = 0; i < set.size(); i++) {
             ArrayList<LivingEntity> currentFriends = ((LivingEntity)set.get(i)).getFriends();
