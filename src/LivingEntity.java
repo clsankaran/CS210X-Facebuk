@@ -1,9 +1,15 @@
 import java.util.ArrayList;
 public class LivingEntity extends Item{
 
+    // instance variables
     private ArrayList<LivingEntity> _friends;
     private ArrayList<Moment> _moments;
 
+    /**
+     * Constructor that specifies the name and image.
+     * @param name the name that the instance variable _name, of the super class Item, will be set to.
+     * @param image the image that the instance variable _image, of the super class Item, will be set to.
+     */
     public LivingEntity(String name, Image image){
         super(name, image);
         this._friends = new ArrayList<LivingEntity>();
