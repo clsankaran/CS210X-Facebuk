@@ -15,4 +15,4 @@ and the LivingEntity object can be used, for example in the participants list of
 We were also thinking about including an Ownable class that would be extended by both Pet and Possession,
 but the Pet class cannot have two super classes and there is only one simple shared method, so the code
 duplication is minimal even even without an Ownable class. Making an interface called Ownable would not 
-reduce code redudancy.
+reduce code redundancy.
